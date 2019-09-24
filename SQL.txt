@@ -1,0 +1,99 @@
+
+ 
+CREATE TABLE Teaches
+(
+    Id INT PRIMARY KEY ,
+    Name VARCHAR(20) NOT NULL
+);
+
+CREATE TABLE Students
+(
+    Id INT PRIMARY KEY ,
+    Name VARCHAR(20) NOT NULL,
+    Subject_id INT REFERENCES Subject (Id), 
+    Subject_grade INT
+);
+ CREATE TABLE Subject
+(
+    ID INT PRIMARY KEY,
+    Item_Name VARCHAR(20) NOT NULL,
+    Teacher_id INT REFERENCES Teaches (Id)  
+);
+ 
+2
+
+INSERT INTO Teaches (Id, Name) VALUES ('1', 'Ivan Ivanovich');
+INSERT INTO Teaches (Id, Name) VALUES ('2', 'Ivan Petrovich');
+INSERT INTO Teaches (Id, Name) VALUES ('3', 'Petr Ivanovich');
+INSERT INTO Teaches (Id, Name) VALUES ('4', 'Alecsandr Ivanovich');
+INSERT INTO Teaches (Id, Name) VALUES ('5', 'Victor Ivanovich');
+
+INSERT INTO Students (Id, Name, Subject_id, Subject_grade ) VALUES ('1', 'Ivanov', '5', '5');
+INSERT INTO Students (Id, Name, Subject_id, Subject_grade ) VALUES ('2', 'Petrov', '4', '4');
+INSERT INTO Students (Id, Name, Subject_id, Subject_grade ) VALUES ('3', 'Sidorov', '3', '5');
+INSERT INTO Students (Id, Name, Subject_id, Subject_grade ) VALUES ('4', 'Alecsandrov', '2', '3');
+INSERT INTO Students (Id, Name, Subject_id, Subject_grade ) VALUES ('5', 'Kirov', '1', '4');
+
+INSERT INTO Subject (Id, Item_Name, Teacher_id) VALUES ('1', 'Mathematics', '5');
+INSERT INTO Subject (Id, Item_Name, Teacher_id) VALUES ('2', 'Computer science', '4');
+INSERT INTO Subject (Id, Item_Name, Teacher_id) VALUES ('3', 'English language', '3');
+INSERT INTO Subject (Id, Item_Name, Teacher_id) VALUES ('4', 'Painting', '2');
+INSERT INTO Subject (Id, Item_Name, Teacher_id) VALUES ('5', 'Ukrainian language', '1');
+
+3
+SELECT * From Teaches;
+SELECT * From Students;
+SELECT * From Subject;
+
+4
+INSERT INTO Students (Id, Name, Subject_id, Subject_grade ) VALUES ('6', 'Ivchenko', '5', '5');
+INSERT INTO Students (Id, Name, Subject_id, Subject_grade ) VALUES ('7', 'Petrenko', '4', '4');
+INSERT INTO Students (Id, Name, Subject_id, Subject_grade ) VALUES ('8', 'Sidorenko', '3', '5');
+INSERT INTO Students (Id, Name, Subject_id, Subject_grade ) VALUES ('9', 'Alecsandrenko', '2', '3');
+INSERT INTO Students (Id, Name, Subject_id, Subject_grade ) VALUES ('10', 'Kirichenko', '1', '4');
+INSERT INTO Students (Id, Name, Subject_id, Subject_grade ) VALUES ('11', 'Zelenov', '5', '5');
+INSERT INTO Students (Id, Name, Subject_id, Subject_grade ) VALUES ('12', 'Ranenko', '4', '4');
+INSERT INTO Students (Id, Name, Subject_id, Subject_grade ) VALUES ('13', 'Generalova', '3', '5');
+INSERT INTO Students (Id, Name, Subject_id, Subject_grade ) VALUES ('14', 'vetrov', '2', '3');
+INSERT INTO Students (Id, Name, Subject_id, Subject_grade ) VALUES ('15', 'Dorov', '1', '4');
+INSERT INTO Students (Id, Name, Subject_id, Subject_grade ) VALUES ('16', 'Karpenko', '5', '5');
+INSERT INTO Students (Id, Name, Subject_id, Subject_grade ) VALUES ('17', 'klimenko', '4', '4');
+INSERT INTO Students (Id, Name, Subject_id, Subject_grade ) VALUES ('18', 'Slavin', '3', '5');
+INSERT INTO Students (Id, Name, Subject_id, Subject_grade ) VALUES ('19', 'Amosov', '2', '3');
+INSERT INTO Students (Id, Name, Subject_id, Subject_grade ) VALUES ('20', 'Krotov', '1', '4');
+
+5
+SELECT Name FROM Students;
+
+6
+
+Update Students set Subject_grade = NULL where id between 1 AND 4;
+
+7
+
+SELECT Name FROM Students
+WHERE Subject_grade IS NULL;
+
+8
+
+ALTER TABLE Students ADD Age CHAR (20);
+UPDATE Students SET Age = 18 WHERE Subject_id = 5;
+UPDATE Students SET Age = 19 WHERE Subject_id = 4;
+UPDATE Students SET Age = 20 WHERE Subject_id = 3;
+UPDATE Students SET Age = 21 WHERE Subject_id = 2;
+UPDATE Students SET Age = 22 WHERE Subject_id = 1;
+
+SELECT Name, Age FROM Students
+WHERE Age between 20 AND 22;
+
+9
+SELECT Name, Age FROM Students
+ORDER BY Age ASC;
+
+10
+SELECT Name, Age FROM Students
+ORDER BY Age DESC;
+
+11 SELECT Name, Age FROM Students WHERE Subject_grade IS NOT NULL
+ORDER BY Age DESC, Name ASC;
+

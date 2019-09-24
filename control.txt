@@ -1,0 +1,63 @@
+CREATE TABLE Prices
+(
+    product_id INT NOT NULL PRIMARY KEY ,
+    product_name VARCHAR(20) NOT NULL,
+    price INT NULL
+);
+CREATE TABLE Stock (
+    id int NOT NULL PRIMARY KEY,
+    product_id INT NOT NULL FOREIGN KEY REFERENCES Prices(product_id),
+    quantity int NOT NULL ,
+    type VARCHAR(20) NOT NULL
+);
+
+INSERT INTO Prices (product_id, product_name,price) VALUES ('1', 'dress black', '100');
+INSERT INTO Prices (product_id, product_name,price) VALUES ('2', 'dress red', '200');
+INSERT INTO Prices (product_id, product_name,price) VALUES ('3', 'dress blue', '300');
+INSERT INTO Prices (product_id, product_name,price) VALUES ('4', 'dress pink', '150');
+INSERT INTO Prices (product_id, product_name,price) VALUES ('5', 'dress green', '300');
+INSERT INTO Prices (product_id, product_name,price) VALUES ('6', 'dress broun', '450');
+INSERT INTO Prices (product_id, product_name,price) VALUES ('7', 'dress orenge', '400');
+INSERT INTO Prices (product_id, product_name,price) VALUES ('8', 'dress', '350');
+INSERT INTO Prices (product_id, product_name,price) VALUES ('9', 'dress 1', '500');
+INSERT INTO Prices (product_id, product_name,price) VALUES ('10', 'dress 2', '550');
+
+
+
+INSERT INTO Stock (id, product_id, quantity,type) VALUES ('1', '10', '10', 'light industry');
+INSERT INTO Stock (id, product_id, quantity,type) VALUES ('2', '9', '120', 'light industry');
+INSERT INTO Stock (id, product_id, quantity,type) VALUES ('3', '6', '150', 'light industry');
+INSERT INTO Stock (id, product_id, quantity,type) VALUES ('4', '8', '15', 'light industry');
+INSERT INTO Stock (id, product_id, quantity,type) VALUES ('5', '7', '1', 'light industry');
+INSERT INTO Stock (id, product_id, quantity,type) VALUES ('6', '5', '9', 'light industry');
+INSERT INTO Stock (id, product_id, quantity,type) VALUES ('7', '4', '110', 'light industry');
+INSERT INTO Stock (id, product_id, quantity,type) VALUES ('8', '3', '20', 'light industry');
+INSERT INTO Stock (id, product_id, quantity,type) VALUES ('9', '2', '30', 'light industry');
+INSERT INTO Stock (id, product_id, quantity,type) VALUES ('10', '1', '40', 'light industry');
+
+SELECT product_name FROM Prices
+WHERE product_id=2 OR product_id=7 OR product_id=10;
+
+SELECT MAX(price), product_name FROM Prices;
+
+SELECT SUM(quantity)
+FROM Stock
+GROUP BY type
+
+
+SELECT SUM(quantity)
+FROM Stock
+GROUP BY type
+HAVING SUM(quantity) > 5;
+
+SELECT Prices.product_id, Prices.product_name , Stock.quantity 
+FROM `Prices` 
+
+LEFT OUTER JOIN `Stock`  ON Prices.product_id = Stock.product_id
+ GROUP BY product_id
+HAVING SUM(quantity) > 10;
+
+
+
+
+
